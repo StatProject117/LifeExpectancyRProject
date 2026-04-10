@@ -16,8 +16,8 @@ response <- data_cleaned$Life_expectancy # Response variable is defined
 predictors <- data_cleaned %>% select( -Country, -Life_expectancy) # Predictors are defined
 
 # Check dimensions sanity check
-length(response)  # Should be n = 2864
-dim(predictors)  # Should be n = 2864 p = 18
+#length(response)  # Should be n = 2864
+#dim(predictors)  # Should be n = 2864 p = 18
 
 ## Test and Train split ##
 set.seed(117) # So data vals can be recreated
