@@ -127,7 +127,7 @@ plot(
   label = TRUE,
   xlab = "lambda",
   ylab = " Cross-Validation \n Mean-Squared Error", #IDK why its not working?
-  main = "Ridge Cross-Validation \n Error vs log(lambda)"
+  main = "Ridge Cross-Validation \n Error vs lambda"
 )
 
 plot(
@@ -136,7 +136,7 @@ plot(
   label = TRUE,
   xlab = "lambda",
   ylab = " Cross-Validation \n Mean-Squared Error", #IDK why its not working?
-  main = "Lasso Cross-Validation \n Error vs log(lambda)"
+  main = "Lasso Cross-Validation \n Error vs lambda"
 )
 
 par( mfrow = c(1, 1 ))
