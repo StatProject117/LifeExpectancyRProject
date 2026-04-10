@@ -78,10 +78,10 @@ rmse_lasso <- sqrt(mean((test_response - lasso_pred)^2))
 rmse_least_squares <- sqrt(mean((test_response - least_squares_pred)^2))
 
 
-cat("\n--- COMPARISON OF ALL THREE MODELS ---\n")
-cat(sprintf("OLS (Least Squares) RMSE: %.4f\n", rmse_least_squares))
-cat(sprintf("Ridge RMSE:               %.4f\n", rmse_ridge))
-cat(sprintf("Lasso RMSE:               %.4f\n", rmse_lasso))
+cat("\n ### COMPARISON OF ALL THREE MODELS ### \n")
+cat(sprintf("OLS RMSE = %.4f \n", rmse_least_squares))
+cat(sprintf("Ridge RMSE =               %.4f \n", rmse_ridge))
+cat(sprintf("Lasso RMSE =               %.4f \n", rmse_lasso))
 
 # Check OLS coefficients for sanity of model
 #least_squares_coefs <- coef(least_squares_model)
