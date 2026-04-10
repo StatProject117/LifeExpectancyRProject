@@ -22,7 +22,7 @@ dim(predictors)  # Should be n = 2864 p = 18
 ## Test and Train split ##
 set.seed(117) # So data vals can be recreated
 
-train_index <- createDataPartition(response, p = 0.8, list = FALSE) #80/20 split
+train_index <- createDataPartition(response, p = 0.8, list = FALSE) #80/20 split tried with 75</25 and 70/30
 #train data group
 train_data <- predictors[train_index, ]
 train_response <- response[train_index]
@@ -101,12 +101,12 @@ data_cleaned$Pred_Lasso <- predict( lasso_model, s = best_lambda_lasso, newx = x
 
 # Collect the country average of the time period the data covers, so 2000- 2015
 country_avg_ridge <- data_cleaned %>%
-  group_by(Country) %>% #here we group by the column country
+  group_by(Country) %>% #group_by like how pandas
   summarise(Avg_Pred_Ridge = mean(Pred_Ridge, na.rm = TRUE)) %>% #take the mean of them
   arrange(desc(Avg_Pred_Ridge))
 
 country_avg_lasso <- data_cleaned %>%
-  group_by(Country) %>% #here we greoup by the column country
+  group_by(Country) %>% #group_by like how pandas
   summarise(Avg_Pred_Lasso = mean(Pred_Lasso, na.rm = TRUE)) %>% #take the mean of them
   arrange(desc(Avg_Pred_Lasso))
 
@@ -119,11 +119,25 @@ cat("\n ## Top 16 Life expectancy using lasso regression ## \n")
 print(head(country_avg_lasso, 16))
 
 ## Plots and some visualisation of the data ##
+par( mfrow = c(1, 2), mar = c(4, 4, 7, 2))
 
-par( mfrow = c(1, 2), mar = c(4, 4, 5, 2))
+plot(
+  ridge_model,
+  xvar = "lambda",
+  label = TRUE,
+  xlab = "lambda",
+  ylab = " Cross-Validation \n Mean-Squared Error", #IDK why its not working?
+  main = "Ridge Cross-Validation \n Error vs log(lambda)"
+)
 
-plot(ridge_model, xvar = "lambda", label = TRUE, main = "Ridge Coefficients")
-plot(lasso_model, xvar = "lambda", label = TRUE, main = "Lasso Coefficients")
+plot(
+  lasso_model,
+  xvar = "lambda",
+  label = TRUE,
+  xlab = "lambda",
+  ylab = " Cross-Validation \n Mean-Squared Error", #IDK why its not working?
+  main = "Lasso Cross-Validation \n Error vs log(lambda)"
+)
 
 par( mfrow = c(1, 1 ))
 # Cross validation error vs tuning parameter lambda
